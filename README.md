@@ -27,7 +27,7 @@ This repository provides tools and scripts for calculating climate indices devel
       cd pr
 
 ## Install libraries
-pip install xarray pandas geopandas regionmask matplotlib numpy cftime 
+    pip install xarray pandas geopandas regionmask matplotlib numpy cftime 
 
 ## Run script
 
