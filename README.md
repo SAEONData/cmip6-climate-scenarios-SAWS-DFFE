@@ -18,6 +18,10 @@ This repository provides tools and scripts for calculating climate indices devel
 | **Rx5day**  | Wettest 5-day period of the year                         | mm       |
 
 ## Getting started
+git clone https://github.com/<org>/nex-gddp-sa-tools.git
+cd nex-gddp-sa-tools
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 git clone https://github.com/MfopaC cmip6-climate-scenarios-SAWS-DFFE.git
 
 cd cmip6-climate-scenarios-SAWS-DFFE
