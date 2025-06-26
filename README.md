@@ -1,5 +1,5 @@
 # cmip6-climate-scenarios-SAWS-DFFE
-This repository provides tools and scripts for calculating climate indices developed by the South African Weather Service. It uses CMIP6 climate projections across South Africa from NASA's Earth Exchange Global Daily Downscaled Projections. The analysis combines information from bio-climatic regions and urban centers to assess climate extremes.
+This repository provides tools and scripts for calculating climate indices developed by the South African Weather Service. It uses CMIP6 climate projections across South Africa from NASA's Earth Exchange Global Daily Downscaled Projections. The analysis combines information from bio-climatic regions and urban centres to assess climate extremes.
 
                     | Short Name  | Description                                              | Units    |
                     | ----------- | -------------------------------------------------------- | -------- |
