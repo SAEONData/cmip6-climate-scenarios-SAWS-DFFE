@@ -3,6 +3,26 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Data files
+*.nc
+*.csv
+*.tif
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+
+# OS and IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+.env
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
 # C extensions
 *.so
 
