@@ -19,8 +19,11 @@ This repository provides tools and scripts for calculating climate indices devel
 
 ## Getting started
 git clone https://github.com/MfopaC cmip6-climate-scenarios-SAWS-DFFE.git
+
 cd cmip6-climate-scenarios-SAWS-DFFE
+
 cd scripts
+
 cd pr
 
 ## Install libraries
