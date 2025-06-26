@@ -5,7 +5,6 @@ __pycache__/
 
 # Data files
 *.nc
-*.csv
 *.tif
 
 # OS and IDE junk
