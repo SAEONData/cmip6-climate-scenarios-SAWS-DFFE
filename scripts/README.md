@@ -1,4 +1,4 @@
-# Climate Indices- Rainfall
+## Climate Indices- Rainfall
 
                     | Short Name  | Description                                              | Units    |
                     | ----------- | -------------------------------------------------------- | -------- |
@@ -17,7 +17,7 @@
                     | **Rx5day**  | Wettest 5-day period of the year                         | mm       |
                     
 
-  # Climate Indices- Temperature
+  ## Climate Indices- Temperature
                     | Short Name  | Description                                                       | Units    |
                     | ----------- | ----------------------------------------------------------------- | -------- |
                     | **FD**      | Days with minimum temperature below 0°C (frost days)              | days     |
@@ -37,7 +37,7 @@
                     | **TN90p**   | % of days with TN > 90th percentile (warm nights)                 | %        |
 
 
-# CMIP Variable Descriptions
+## CMIP6 Variable Descriptions
             | Variable  | Full Name                               | Unit       | Description                                                                 |
             | --------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------------- |
             | **hurs**  | Relative Humidity                        | %          | Near-surface relative humidity (usually at 2 meters above ground).          |
