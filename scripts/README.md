@@ -1,4 +1,4 @@
-# Climate Indices for Rainfall
+# Climate Indices- Rainfall
 
                     | Short Name  | Description                                              | Units    |
                     | ----------- | -------------------------------------------------------- | -------- |
@@ -17,7 +17,7 @@
                     | **Rx5day**  | Wettest 5-day period of the year                         | mm       |
                     
 
-  # Climate Indices for Temperature
+  # Climate Indices- Temperature
                     | Short Name  | Description                                                       | Units    |
                     | ----------- | ----------------------------------------------------------------- | -------- |
                     | **FD**      | Days with minimum temperature below 0°C (frost days)              | days     |
