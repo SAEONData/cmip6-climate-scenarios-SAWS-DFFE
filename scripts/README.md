@@ -1,4 +1,6 @@
-                      | Short Name  | Description                                              | Units    |
+# SAWS Rainfall Index Parameters
+
+                    | Short Name  | Description                                              | Units    |
                     | ----------- | -------------------------------------------------------- | -------- |
                     | **CDD**     | Max consecutive dry days (PR < 1 mm/day)                 | days     |
                     | **CWD**     | Max consecutive wet days (PR ≥ 1 mm/day)                 | days     |
