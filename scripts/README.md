@@ -38,13 +38,13 @@
 
 
 # CMIP Variable Descriptions
-| Variable  | Full Name                               | Unit       | Description                                                                 |
-| --------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------------- |
-| **hurs**  | Relative Humidity                        | %          | Near-surface relative humidity (usually at 2 meters above ground).          |
-| **huss**  | Specific Humidity                        | kg/kg      | Near-surface specific humidity, the ratio of water vapor mass to air mass.  |
-| **pr**    | Precipitation Rate                       | kg/m²/s    | Total precipitation rate. Multiply by 86400 to get mm/day.                 |
-| **rssds** | Surface Downwelling Shortwave Radiation  | W/m²       | Solar radiation received at the surface (clear-sky and all-sky).            |
-| **sfcWind**| Near-surface Wind Speed                 | m/s        | Magnitude of wind speed at 10 meters above the surface.                     |
-| **tas**   | Near-surface Air Temperature             | K          | Daily average temperature at 2 meters above ground.                         |
-| **tasmax**| Daily Maximum Near-surface Temperature   | K          | Maximum daily temperature at 2 meters above the surface.                    |
-| **tasmin**| Daily Minimum Near-surface Temperature   | K          | Minimum daily temperature at 2 meters above the surface.    
+            | Variable  | Full Name                               | Unit       | Description                                                                 |
+            | --------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------------- |
+            | **hurs**  | Relative Humidity                        | %          | Near-surface relative humidity (usually at 2 meters above ground).          |
+            | **huss**  | Specific Humidity                        | kg/kg      | Near-surface specific humidity, the ratio of water vapor mass to air mass.  |
+            | **pr**    | Precipitation Rate                       | kg/m²/s    | Total precipitation rate. Multiply by 86400 to get mm/day.                 |
+            | **rssds** | Surface Downwelling Shortwave Radiation  | W/m²       | Solar radiation received at the surface (clear-sky and all-sky).            |
+            | **sfcWind**| Near-surface Wind Speed                 | m/s        | Magnitude of wind speed at 10 meters above the surface.                     |
+            | **tas**   | Near-surface Air Temperature             | K          | Daily average temperature at 2 meters above ground.                         |
+            | **tasmax**| Daily Maximum Near-surface Temperature   | K          | Maximum daily temperature at 2 meters above the surface.                    |
+            | **tasmin**| Daily Minimum Near-surface Temperature   | K          | Minimum daily temperature at 2 meters above the surface.    
