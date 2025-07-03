@@ -35,7 +35,7 @@ All model downloads use the same ensemble member
     *r1i1p1f1*   
 
 ## Grid label consideration
-Please note the grid label varies between models, therefor adjust accordingly for data download.
+Please note the grid label varies between models, therefore adjust accordingly for download.
     "gn"
     "gr" 
     "gr1" and "gr2" 
