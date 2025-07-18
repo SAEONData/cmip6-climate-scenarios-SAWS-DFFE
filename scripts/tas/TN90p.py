@@ -101,7 +101,7 @@ for model in tqdm(model_dirs, desc="🔁 Processing models"):
             ds.close()
 
     except Exception as e:
-        print(f"❌ Failed to process {model}: {e}")
+        print(f" Failed to process {model}: {e}")
 
 # ------------------ Save and Visualize ------------------ #
 if model_pct_national:
