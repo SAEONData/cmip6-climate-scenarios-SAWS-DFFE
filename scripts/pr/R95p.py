@@ -10,8 +10,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ------------------ Configuration ------------------ #
-input_dir = "/content/drive/MyDrive/Climate Data TTT/models"
-shapefile_path = "/content/drive/MyDrive/CLIMREG OVERLAPS REMOVED/cleaned_veg_biome_clim_reg.shp"
+input_dir = "/home/caroline/nex-gddp-sa-tools/data/pr"
+shapefile_path = "/home/caroline/nex-gddp-sa-tools/climate_regions/cleaned_veg_biome_clim_reg.shp"
 base_period = slice("1950-01-01", "2014-12-31")
 sa_bounds = dict(lat=slice(-35, -22), lon=slice(16, 33))
 
@@ -26,9 +26,12 @@ region_mask = regionmask.Regions(
 
 # ------------------ Helper Functions ------------------ #
 def compute_pr95p(pr, base_period):
-    base = pr.sel(time=base_period)
-    wet_base = base.where(base >= 1.0)
-    return wet_base.reduce(np.nanpercentile, q=95, dim="time")
+    try:
+        base = pr.sortby("time").sel(time=base_period)
+        wet_base = base.where(base >= 1.0)
+        return wet_base.reduce(np.nanpercentile, q=95, dim="time")
+    except Exception as e:
+        raise ValueError(f"Error computing 95th percentile during base period: {e}")
 
 def compute_sum_above_95p(pr, pr95p):
     heavy = pr.where(pr > pr95p)
@@ -42,16 +45,24 @@ print(f"📂 Found {len(model_dirs)} model folders.")
 
 for model in tqdm(model_dirs, desc="🔁 Processing models"):
     model_path = os.path.join(input_dir, model)
-    nc_files = sorted(glob.glob(os.path.join(model_path, "*.nc")))
+    nc_files = sorted(glob.glob(os.path.join(model_path, "**", "*.nc"), recursive=True))
+
     if not nc_files:
         print(f"⚠️ No NetCDF files found in {model_path}")
         continue
 
     try:
         ds_list = [xr.open_dataset(f) for f in nc_files]
-        pr = xr.concat([ds["pr"] for ds in ds_list], dim="time") * 86400  # kg/m²/s to mm/day
-        pr = pr.sel(**sa_bounds)
+        pr_list = []
+        for ds in ds_list:
+            if "pr" not in ds:
+                raise ValueError("Missing 'pr' variable in dataset")
+            pr_list.append(ds["pr"])
 
+        pr = xr.concat(pr_list, dim="time") * 86400  # Convert from kg/m²/s to mm/day
+        pr = pr.sortby("time").sel(**sa_bounds)
+
+        # Skip models with insufficient time
         if pr.time.size < 365 * 30:
             print(f"⚠️ Skipping {model} due to insufficient time coverage.")
             continue
@@ -90,8 +101,8 @@ if model_sum_bioregion:
     bioregions["SumPR95p"] = ensemble_bio_sum.values
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    vmin = int(bioregions["SumPR95p"].min())
-    vmax = int(bioregions["SumPR95p"].max())
+    vmin = int(np.floor(bioregions["SumPR95p"].min()))
+    vmax = int(np.ceil(bioregions["SumPR95p"].max()))
     step = max((vmax - vmin) // 5, 10)
     ticks = range(vmin, vmax + step, step)
 
