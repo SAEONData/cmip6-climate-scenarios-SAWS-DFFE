@@ -26,8 +26,8 @@
                     | **TNn**     | Coldest daily minimum temperature                                 | °C       |
                     | **WSDI**    | Warm spell duration: TX > 90th percentile for ≥ 6 consecutive days| days     |
                     | **CSDI**    | Cold spell duration: TN < 10th percentile for ≥ 6 consecutive days| days     |
-                    | **TX50p** | % of days with TX above the 50th percentile                       | %        |
-                    | **TX30**  | Days with TX ≥ 30°C                                               | days     |
+                    | **TX50gtp** | % of days with TX above the 50th percentile                       | %        |
+                    | **TXge30**  | Days with TX ≥ 30°C                                               | days     |
                     | **TXNd**  | Consecutive days where both TX & TN > 95th percentile             | events   |
                     | **TNx**     | Warmest daily minimum temperature (hottest night)                 | °C       |
                     | **TXn**     | Coldest daily maximum temperature (coldest day)                   | °C       |
