@@ -1,4 +1,4 @@
-import os
+import os 
 import glob
 import numpy as np
 import xarray as xr
@@ -25,18 +25,18 @@ region_mask = regionmask.Regions(
 )
 
 # ------------------ Helper Functions ------------------ #
-def compute_tx90p(tasmax, base_period):
+def compute_tx50p(tasmax, base_period):
     base = tasmax.sel(time=base_period)
     if base.time.size == 0:
         raise ValueError("⚠️ Base period is empty.")
-    return base.groupby("time.dayofyear").reduce(np.percentile, q=90, dim="time")
+    return base.groupby("time.dayofyear").reduce(np.percentile, q=50, dim="time")
 
-def compute_hot_day_percentage(tasmax, tx90p):
+def compute_above_median_percentage(tasmax, tx50p):
     doy = tasmax["time"].dt.dayofyear
-    threshold = tx90p.sel(dayofyear=doy)
+    threshold = tx50p.sel(dayofyear=doy)
     hot_days = tasmax > threshold
-    annual_hot_pct = 100 * hot_days.groupby("time.year").mean(dim="time")
-    return annual_hot_pct
+    annual_pct = 100 * hot_days.groupby("time.year").mean(dim="time")
+    return annual_pct
 
 # ------------------ Main Processing ------------------ #
 model_pct_bioregion = []
@@ -60,15 +60,15 @@ for model in tqdm(model_dirs, desc="🔁 Processing models"):
             print(f"⚠️ Skipping {model} due to insufficient time coverage.")
             continue
 
-        tx90p = compute_tx90p(tasmax, base_period)
-        annual_hot_pct = compute_hot_day_percentage(tasmax, tx90p)
+        tx50p = compute_tx50p(tasmax, base_period)
+        annual_pct = compute_above_median_percentage(tasmax, tx50p)
 
         # National average
-        model_pct_national.append(annual_hot_pct.mean(dim=["lat", "lon"]))
+        model_pct_national.append(annual_pct.mean(dim=["lat", "lon"]))
 
         # Bioregional average
         region_ids = region_mask.mask(tasmax)
-        bio_means = [annual_hot_pct.where(region_ids == r).mean(dim=["lat", "lon"], skipna=True)
+        bio_means = [annual_pct.where(region_ids == r).mean(dim=["lat", "lon"], skipna=True)
                      for r in range(len(region_mask))]
         model_pct_bioregion.append(xr.concat(bio_means, dim="region"))
 
@@ -81,36 +81,37 @@ for model in tqdm(model_dirs, desc="🔁 Processing models"):
 # ------------------ Save and Visualize ------------------ #
 if model_pct_national:
     ensemble_pct = xr.concat(model_pct_national, dim="model").mean(dim="model")
-    ensemble_pct.name = "HotDaysPct"
+    ensemble_pct.name = "Above50Pct"
     ensemble_pct.attrs.update({
-        "description": "Percentage of Hot Days (TX > 90th percentile)",
+        "description": "Percentage of Days with TX > 50th percentile",
         "units": "%"
     })
-    ensemble_pct.to_netcdf(os.path.join(input_dir, "ensemble_hot_days_pct_SA.nc"))
-    print("✅ Saved national ensemble hot day percentage.")
+    ensemble_pct.to_netcdf(os.path.join(input_dir, "ensemble_above50pct_tx_SA.nc"))
+    print("✅ Saved national ensemble percentage for TX > 50th percentile.")
 else:
     print("⚠️ No valid national data.")
 
 if model_pct_bioregion:
     ensemble_bio_pct = xr.concat(model_pct_bioregion, dim="model").mean(dim=["model", "year"])
-    bioregions["HotDaysPct"] = ensemble_bio_pct.values
+    bioregions["Above50Pct"] = ensemble_bio_pct.values
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    vmin = int(bioregions["HotDaysPct"].min())
-    vmax = int(bioregions["HotDaysPct"].max())
+    vmin = int(bioregions["Above50Pct"].min())
+    vmax = int(bioregions["Above50Pct"].max())
     ticks = range(vmin, vmax + 5, 5)
 
     bioregions.plot(
-        column="HotDaysPct",
-        cmap="Reds",
+        column="Above50Pct",
+        cmap="OrRd",
         linewidth=0.8,
         edgecolor="black",
         legend=True,
-        legend_kwds={"label": "% of Hot Days", "orientation": "vertical", "ticks": ticks},
+        legend_kwds={"label": "% Days TX > 50th percentile", "orientation": "vertical", "ticks": ticks},
         ax=ax
     )
 
-    ax.set_title("CMIP6: % of Days with TX > 90th Percentile by Bioregion (1950–2014)", fontsize=14)
+    ax.set_title("CMIP6: % of Days with TX > 50th Percentile by Bioregion (1950–2014)", fontsize=14)
     ax.set_axis_off()
     plt.tight_layout()
     plt.show()
+
