@@ -102,7 +102,7 @@ ticks = range(int(vmin), int(vmax) + step, step)
 
 bioregions_merged.plot(
     column="Min_TN",
-    cmap="coolwarm_r",
+    cmap="coolwarm",
     linewidth=0.8,
     edgecolor="black",
     legend=True,
