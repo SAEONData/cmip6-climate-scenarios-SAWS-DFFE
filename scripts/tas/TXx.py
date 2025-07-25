@@ -121,7 +121,7 @@ towns_gdf.plot(ax=ax, color='blue', markersize=40, zorder=5)
 for x, y, label in zip(towns_gdf.geometry.x, towns_gdf.geometry.y, towns_gdf['city']):
     ax.text(x, y, label, fontsize=9, ha='left', va='bottom')
 
-ax.set_title("CMIP6: MaxTx, Warmest Daily Maximum Temperature by Vegetation Biomes (1950–2014)", fontsize=14)
+ax.set_title("CMIP6: TXx, Warmest Daily Maximum Temperature by Vegetation Biomes (1950–2014)", fontsize=14)
 ax.set_axis_off()
 plt.tight_layout()
 plt.show()
