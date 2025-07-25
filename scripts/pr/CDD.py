@@ -148,7 +148,7 @@ towns_gdf.plot(ax=ax, color='red', markersize=40, zorder=5)
 for x, y, label in zip(towns_gdf.geometry.x, towns_gdf.geometry.y, towns_gdf['city']):
     ax.text(x, y, label, fontsize=9, ha='left', va='bottom')
 
-ax.set_title("CMIP6 CDD by Veg Biomes (1950-2014)", fontsize=14)
+ax.set_title("CMIP6: CDD  (PR < 1 mm/day) by Veg Biomes (1950-2014)", fontsize=14)
 ax.set_axis_off()
 plt.tight_layout()
 plt.show()
