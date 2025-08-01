@@ -1,23 +1,14 @@
-# Data Handling
 pandas>=1.3
 numpy>=1.21
-
-# NetCDF and Time Series
 xarray>=2022.06
 netCDF4>=1.5
 cftime>=1.5
 cf_xarray>=0.7 
-
-# Geospatial Analysis
 geopandas>=0.10
 shapely>=1.7
 pyproj>=3.3
 fiona>=1.8
 regionmask>=0.9
-
-# Plotting
 matplotlib>=3.4
-
-# Machine Learning and Statistics
 scipy>=1.7
 rasterio>=1.2
